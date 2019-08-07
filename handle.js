@@ -13,16 +13,20 @@ module.exports = {
             comment = "без комментариев";
         }
         switch (relation) {
+            case '/start':
+                event.start(ctx.from.username);
+                send(ctx, "Однако описание бота!");
+                break;
             case '+':
                 if (username) {
                     if (username[0] == '@' && username.length > 5) {
                         event.trust(ctx.from.username, username.slice(1), comment)
-                        send(ctx, 'теперь Вы доверяете ' + username + ' с комментарием "' + comment + '"');
+                        send(ctx, 'Теперь Вы доверяете ' + username + ' с комментарием "' + comment + '"');
                     } else {
-                        send(ctx, "некорректный юзернейм");
+                        send(ctx, "Некорректный юзернейм");
                     }
                 } else {
-                    send(ctx, 'need to target user');
+                    send(ctx, 'Необходимо указать юзернейм');
                 }
                 break;
             case '-':
@@ -39,10 +43,9 @@ module.exports = {
                 break;
             case '0':
                 if (username) {
-                    ji
                     if (username[0] == '@' && username.length > 5) {
                         event.neutral(ctx.from.username, username)
-                        send(ctx, "теперь Вы нейтрально относитесь к " + username);
+                        send(ctx, "Теперь Вы нейтрально относитесь к " + username);
                     } else {
                         send(ctx, "некорректный юзернейм");
                     }
@@ -53,11 +56,35 @@ module.exports = {
             default:
                 if (relation[0] == '@' && relation.length > 5) {
                     let answer = find.findPath(ctx.from.username, relation.slice(1));
-                    send(ctx, "ПРОВЕРКА " + ctx.from.username+" "+ relation.slice(1));
-                    answer.forEach(e => {
-                        send(ctx, 'хоп');
-                        send(ctx, e);
-                    });
+                    // send(ctx, "ПРОВЕРКА " + ctx.from.username + " " + relation.slice(1));
+                    // answer.forEach(e => {
+                    // send(ctx, 'хоп');
+                    if (answer == 'self') {
+                        send(ctx, '@' + ctx.from.username + ' можно доверять как себе');
+                    } else if (answer) {
+                        // send(ctx, answer);
+                        let text = '@';
+                        text += answer.path[answer.path.length - 1].obj;
+                        text += " можно доверять"
+                        send(ctx, text);
+                        // console.log(answer.path.reverse());
+                        for (let a in answer.path.reverse()) {
+                            a = parseInt(a);
+                            let from;
+                            if (a == answer.path.length-1) {
+                                from = " <= Вы"
+                            } else {
+                                from = " <= @"+answer.path[a+1].obj;
+                            }
+                            text = '@'
+                            text += answer.path[a].obj
+                            text += from;
+                            send(ctx, text);
+                            text = answer.path[a].comment;
+                            send(ctx, text);
+                        }
+                    }
+                    // });
                 } else {
                     send(ctx, "некорректный юзернейм");
                 }

@@ -2,8 +2,15 @@ const fs = require('fs');
 const exe = require('./exe');
 
 module.exports = {
-    start: () => {
-
+    lunch:()=>{
+        exe.lunch();
+    },
+    start: (user) => {
+        exe.start(user);
+        saveEvent({
+            event: 'start',
+            user,
+        });
         // send();
     },
     trust: (obj, subj, comment) => {
