@@ -20,7 +20,7 @@ module.exports = {
             case '+':
                 if (username) {
                     if (username[0] == '@' && username.length > 5) {
-                        event.trust(ctx.from.username, username.slice(1), comment)
+                        event.relation(ctx.from.username, username.slice(1), comment, '+')
                         send(ctx, 'Теперь Вы доверяете ' + username + ' с комментарием "' + comment + '"');
                     } else {
                         send(ctx, "Некорректный юзернейм");
@@ -32,64 +32,87 @@ module.exports = {
             case '-':
                 if (username) {
                     if (username[0] == '@' && username.length > 5) {
-                        event.distrust(ctx.from.username, username, comment)
-                        send(ctx, "теперь Вы НЕ доверяете " + username + " с комментарием " + comment);
+                        event.relation(ctx.from.username, username.slice(1), comment, '-')
+                        send(ctx, "Теперь Вы НЕ доверяете " + username + ' с комментарием "' + comment + '"');
                     } else {
-                        send(ctx, "некорректный юзернейм");
+                        send(ctx, "Некорректный юзернейм");
                     }
                 } else {
-                    send(ctx, 'need to target user');
+                    send(ctx, 'Необходимо указать юзерней');
                 }
                 break;
             case '0':
                 if (username) {
                     if (username[0] == '@' && username.length > 5) {
-                        event.neutral(ctx.from.username, username)
+                        event.relation(ctx.from.username, username.slice(1), false, '0')
                         send(ctx, "Теперь Вы нейтрально относитесь к " + username);
                     } else {
                         send(ctx, "некорректный юзернейм");
                     }
                 } else {
-                    send(ctx, 'need to target user');
+                    send(ctx, 'Необходимо указать юзерней');
                 }
                 break;
             default:
                 if (relation[0] == '@' && relation.length > 5) {
                     let answer = find.findPath(ctx.from.username, relation.slice(1));
-                    // send(ctx, "ПРОВЕРКА " + ctx.from.username + " " + relation.slice(1));
-                    // answer.forEach(e => {
-                    // send(ctx, 'хоп');
+                    // let answer = find.f(ctx.from.username, relation.slice(1));
+                    // console.log(answer);
                     if (answer == 'self') {
                         send(ctx, '@' + ctx.from.username + ' можно доверять как себе');
                     } else if (answer) {
-                        // send(ctx, answer);
-                        let text = '@';
-                        text += answer.path[answer.path.length - 1].obj;
-                        text += " можно доверять"
+                        let text = '';
+                        text += '@' + answer[0].username;
+                        // console.log(answer[0])
+                        if (answer[0].relation=='+') {
+                            text += " можно доверять"
+                        } else {
+                            text += " НЕЛЬЗЯ доверять!"
+                        }
                         send(ctx, text);
-                        // console.log(answer.path.reverse());
-                        for (let a in answer.path.reverse()) {
+                        for (let a in answer) {
                             a = parseInt(a);
-                            let from;
-                            if (a == answer.path.length-1) {
-                                from = " <= Вы"
+                            if (a == answer.length - 1) {
+                                text = '@' + answer[a].username + " <= Вы"
                             } else {
-                                from = " <= @"+answer.path[a+1].obj;
+                                text = '@' + answer[a].username + " <= @" + answer[a + 1].username;
                             }
-                            text = '@'
-                            text += answer.path[a].obj
-                            text += from;
                             send(ctx, text);
-                            text = answer.path[a].comment;
+                            text = answer[a].comment;
                             send(ctx, text);
                         }
+                        // send(ctx, answer);
+                        // let text = '@';
+                        // text += answer.path[answer.path.length - 1].obj;
+                        // if(answer.path[answer.path.length - 1].relation=='+'){
+                        //     text += " можно доверять"
+                        // }else{
+                        //     text += " НЕЛЬЗЯ доверять!"
+                        // }
+                        // send(ctx, text);
+
+                        // // console.log(answer.path.reverse());
+                        // for (let a in answer.path.reverse()) {
+                        //     a = parseInt(a);
+                        //     let from;
+                        //     if (a == answer.path.length - 1) {
+                        //         from = " <= Вы"
+                        //     } else {
+                        //         from = " <= @" + answer.path[a + 1].obj;
+                        //     }
+                        //     text = '@'
+                        //     text += answer.path[a].obj
+                        //     text += from;
+                        //     send(ctx, text);
+                        //     text = answer.path[a].comment;
+                        //     send(ctx, text);
+                    } else {
+                        send(ctx, "мало данных, добавьте больше людей кому вы доверяете")
                     }
-                    // });
                 } else {
                     send(ctx, "некорректный юзернейм");
                 }
                 break;
-
         }
 
     }

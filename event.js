@@ -2,7 +2,7 @@ const fs = require('fs');
 const exe = require('./exe');
 
 module.exports = {
-    lunch:()=>{
+    lunch: () => {
         exe.lunch();
     },
     start: (user) => {
@@ -12,6 +12,13 @@ module.exports = {
             user,
         });
         // send();
+    },
+    relation: (obj, subj, comment, relation) => {
+        exe.relation(obj, subj, comment, relation);
+        saveEvent({
+            event: 'relation',
+            obj, subj, comment, relation
+        });
     },
     trust: (obj, subj, comment) => {
         exe.trust(obj, subj, comment);

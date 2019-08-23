@@ -1,5 +1,6 @@
+const config = require('./config');
 const Telegraf = require('telegraf')
-const bot = new Telegraf("242751959:AAG0bmsSuevTxXimiQp5HJgBt1cFGB4Bfag");
+const bot = new Telegraf(config.bottoken);
 
 console.log('bot started!');
 

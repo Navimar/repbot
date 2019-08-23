@@ -6,4 +6,3 @@ const test = require('./test.js')
 test.start();
 input.init();
 event.start();
-
