@@ -1,7 +1,10 @@
 const user = require('./user.js');
+const load = require('./load.js');
 
 module.exports = {
     lunch: () => {
+        user.clear();
+        // load();
     },
     start: (username) => {
         if (!user.byUsername(username)) {

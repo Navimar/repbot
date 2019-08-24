@@ -5,4 +5,4 @@ const test = require('./tests.js')
 
 test();
 input.init();
-event.start();
+event.lunch();
