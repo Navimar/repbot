@@ -1,0 +1,23 @@
+{
+  "name": "repbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "telegraf": "^3.32.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Navimar/repbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Navimar/repbot/issues"
+  },
+  "homepage": "https://github.com/Navimar/repbot#readme"
+}
