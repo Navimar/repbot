@@ -17,7 +17,7 @@ module.exports = {
     }
     let que = [];
     getRelations(from).forEach(e => {
-      que.push([{ username: e.username, comment: e.comment,relation:e.relation }]);
+      que.push([{ username: e.username, comment: e.comment, relation: e.relation }]);
       // console.log(que)
     });
     // console.log(que)
@@ -28,12 +28,12 @@ module.exports = {
     while (que.length > 0 && que[0].length < 6 && que[0][0].username !== to) {
       let firstpath = que.shift();
       getRelations(firstpath[0].username).forEach(e => {
-        // if (map.has(e.username)) {
-          if(e.relation=='+'){
-        que.unshift([{ username: e.username, comment: e.comment, relation: e.relation }].concat(firstpath));
-      }
-        // map.set(e.username, true)
-        // }
+        if (!map.has(e.username)) {
+          if (e.relation == '+') {
+            que.unshift([{ username: e.username, comment: e.comment, relation: e.relation }].concat(firstpath));
+          }
+          map.set(e.username, true)
+        }
       });;
       // firstpath[0].relations.forEach(e => {
       //   que.unshift([{ username: e.username, comment: e.comment }].concat(firstpath));
