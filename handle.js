@@ -64,23 +64,23 @@ module.exports = {
                         let text = '';
                         text += '@' + answer[0].username;
                         // console.log(answer[0])
-                        if (answer[0].relation=='+') {
+                        if (answer[0].relation == '+') {
                             text += " можно доверять"
                         } else {
                             text += " НЕЛЬЗЯ доверять!"
                         }
-                        send(ctx, text);
                         for (let a in answer) {
+                            text += '\n';
                             a = parseInt(a);
                             if (a == answer.length - 1) {
-                                text = '@' + answer[a].username + " <= Вы"
+                                text += '@' + answer[a].username + " <= Вы"
                             } else {
-                                text = '@' + answer[a].username + " <= @" + answer[a + 1].username;
+                                text += '@' + answer[a].username + " <= @" + answer[a + 1].username;
                             }
-                            send(ctx, text);
-                            text = answer[a].comment;
-                            send(ctx, text);
+                            text += '\n';
+                            text += answer[a].comment;
                         }
+                        send(ctx, text);
                         // send(ctx, answer);
                         // let text = '@';
                         // text += answer.path[answer.path.length - 1].obj;
