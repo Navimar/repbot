@@ -10,21 +10,27 @@ module.exports = {
     },
     relation: (objname, subjname, comment, relation) => {
         let obj = user.byUsername(objname);
-        // let subj = user.byUsername(subjname);
-        // if (!subj) {
-        //     subj = user.add(subjname);
-        // }
-        obj.relations.push({ username: subjname, comment, relation });
-    },
-    clearrealtion: (objname, subjname) => {
-        let obj = user.byUsername(objname);
-        if (!obj) {
-            obj = user.add(objname);
-        }
+        let flag = true
         for (let r in obj.relations) {
-            if (obj.relations[r].obj.username == subjname) {
-                obj.relations.splice(r, 1);
+            if (obj.relations[r].username == subjname) {
+                if (relation == '0') {
+                    obj.relations.splice(r, 1);
+                } else {
+                    obj.relations[r] = { username: subjname, comment, relation }
+                }
+                flag = false;
             }
         }
+        if (flag) {
+            obj.relations.push({ username: subjname, comment, relation });
+        }
     },
+    // clearrealtion: (objname, subjname) => {
+    //     let obj = user.byUsername(objname);
+    //     for (let r in obj.relations) {
+    //         if (obj.relations[r].username == subjname) {
+    //             obj.relations.splice(r, 1);
+    //         }
+    //     }
+    // },
 }
