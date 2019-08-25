@@ -60,7 +60,6 @@ module.exports = {
                 if (relation[0] == '@' && relation.length > 5) {
                     let answer = find.findPath(ctx.from.username, relation.slice(1));
                     // let answer = find.f(ctx.from.username, relation.slice(1));
-                    // console.log(answer);
                     if (answer == 'self') {
                         send(ctx, '@' + ctx.from.username + ' можно доверять как себе');
                     } else if (answer) {

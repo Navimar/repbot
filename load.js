@@ -1,4 +1,5 @@
 const readline = require('read-each-line-sync');
+const read = require('./data');
 
 module.exports = (path) => {
     if (!path) {

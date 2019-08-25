@@ -1,10 +1,8 @@
 const user = require('./user.js');
-const load = require('./load.js');
 
 module.exports = {
     lunch: () => {
-        user.clear();
-        // load();
+
     },
     start: (username) => {
         if (!user.byUsername(username)) {
@@ -17,7 +15,14 @@ module.exports = {
         for (let r in obj.relations) {
             if (obj.relations[r].username == subjname) {
                 if (relation == '0') {
+                    // console.log('relations before')
+                    // console.log(obj.relations)
+
                     obj.relations.splice(r, 1);
+
+                    // console.log('relations after')
+                    // console.log(obj.relations)
+
                 } else {
                     obj.relations[r] = { username: subjname, comment, relation }
                 }
@@ -25,7 +30,9 @@ module.exports = {
             }
         }
         if (flag) {
-            obj.relations.push({ username: subjname, comment, relation });
+            if (relation != '0') {
+                obj.relations.push({ username: subjname, comment, relation });
+            }
         }
     },
     // clearrealtion: (objname, subjname) => {
