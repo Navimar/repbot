@@ -6,6 +6,7 @@ module.exports = {
       return 'self'
     }
     let map = new Map;
+    map.set(from, true)
     // from.relations.forEach(e => {
     //   que.unshift([{ username: e.username, comment: e.comment }]);
     // });
