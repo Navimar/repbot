@@ -4,7 +4,16 @@ const find = require('./find');
 
 module.exports = {
     text: (ctx, txt) => {
-        const words = txt.split(' ');
+        txt = txt.trim();
+        // console.log(txt);
+        // console.log('txt0 '+txt[0]);
+        if (['0', '+', '-'].includes(txt[0])) {
+
+           txt = txt[0]+' '+txt.substr(1);
+        }
+        let words = txt.split(' ');
+        words = words.filter(Boolean);
+        // console.log(words)
         let relation = words[0];
         let username = words[1];
         words.splice(0, 2);
