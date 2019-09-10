@@ -2,6 +2,7 @@ const input = require('./input.js')
 const user = require('./user.js')
 const test = require('./tests.js')
 const load = require('./load.js')
+const config = require('./config');
 
 
 // Array Remove - By John Resig (MIT Licensed)
@@ -11,10 +12,12 @@ const load = require('./load.js')
 //     return this.push.apply(this, rest);
 // };
 
+if (config.runtests) {
+    load('testdata.txt');
+    test();
+    user.clear();
+}
 
-load('testdata.txt');
-test();
-user.clear();
 load('data.txt');
 
 input.init();

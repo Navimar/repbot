@@ -8,8 +8,7 @@ module.exports = {
         // console.log(txt);
         // console.log('txt0 '+txt[0]);
         if (['0', '+', '-'].includes(txt[0])) {
-
-           txt = txt[0]+' '+txt.substr(1);
+            txt = txt[0] + ' ' + txt.substr(1);
         }
         let words = txt.split(' ');
         words = words.filter(Boolean);
@@ -31,11 +30,15 @@ module.exports = {
                 break;
             case '+':
                 if (username) {
-                    if (username[0] == '@' && username.length > 5) {
-                        event.relation(ctx.from.username, username.slice(1), comment, '+')
-                        send(ctx, 'Теперь Вы доверяете ' + username + ' с комментарием "' + comment + '"');
+                    if (ctx.from.username == username.slice(1)) {
+                        send(ctx, "Место для смешной шутки про самолюбие");
                     } else {
-                        send(ctx, "Некорректный юзернейм");
+                        if (username[0] == '@' && username.length > 5) {
+                            event.relation(ctx.from.username, username.slice(1), comment, '+')
+                            send(ctx, 'Теперь Вы доверяете ' + username + ' с комментарием "' + comment + '"');
+                        } else {
+                            send(ctx, "Некорректный юзернейм");
+                        }
                     }
                 } else {
                     send(ctx, 'Необходимо указать юзернейм');
@@ -43,11 +46,15 @@ module.exports = {
                 break;
             case '-':
                 if (username) {
-                    if (username[0] == '@' && username.length > 5) {
-                        event.relation(ctx.from.username, username.slice(1), comment, '-')
-                        send(ctx, "Теперь Вы НЕ доверяете " + username + ' с комментарием "' + comment + '"');
+                    if (ctx.from.username == username.slice(1)) {
+                        send(ctx, "Не будьте так самокритичны, мы уверены, все будет хорошо");
                     } else {
-                        send(ctx, "Некорректный юзернейм");
+                        if (username[0] == '@' && username.length > 5) {
+                            event.relation(ctx.from.username, username.slice(1), comment, '-')
+                            send(ctx, "Теперь Вы НЕ доверяете " + username + ' с комментарием "' + comment + '"');
+                        } else {
+                            send(ctx, "Некорректный юзернейм");
+                        }
                     }
                 } else {
                     send(ctx, 'Необходимо указать юзерней');

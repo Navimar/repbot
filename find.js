@@ -7,9 +7,6 @@ module.exports = {
     }
     let map = new Map;
     map.set(from, true)
-    // from.relations.forEach(e => {
-    //   que.unshift([{ username: e.username, comment: e.comment }]);
-    // });
     let getRelations = (username) => {
       let theUser = user.byUsername(username);
       // console.log(theUser.relations)
@@ -18,7 +15,8 @@ module.exports = {
     }
     let que = [];
     getRelations(from).forEach(e => {
-      que.push([{ username: e.username, comment: e.comment, relation: e.relation }]);
+      if (e.username != from)
+        que.push([{ username: e.username, comment: e.comment, relation: e.relation }]);
       // console.log(que)
     });
     // console.log(que)
@@ -34,6 +32,7 @@ module.exports = {
             que.unshift([{ username: e.username, comment: e.comment, relation: e.relation }].concat(firstpath));
           }
           map.set(e.username, true)
+
         }
       });;
       // firstpath[0].relations.forEach(e => {

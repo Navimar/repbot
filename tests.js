@@ -3,6 +3,7 @@ const user = require('./user');
 
 
 module.exports = () => {
+    console.log("tests start");
     //тест чтения сохраненных данных
     message('Happycatfish', '@test983475', '@test983475 можно доверять\n@test983475 <= Вы\nчестный человек, мой бро');
     //теперь начинаем с чистого листа
@@ -36,5 +37,9 @@ module.exports = () => {
     message('jim8012', '+ @Happycatfish отзыв от Happycatfish');
     message('jim8012', '@maxjaja', 'Для построения цепочки доверия необходимо добавить больше пользователей, которым вы доверяете.\nЧтобы реже видеть эту ошибку, обозначьте свое доверие ко всем, кому вы доверяете командой\n+ @username\nи попросите их указать, кому доверяют они.');
     message('Happycatfish', '@Happycatfish', '@Happycatfish можно доверять как себе');
+    message('aryadovoy', '+ @aryadovoy Прежде всего нужно любить себя :)','Место для смешной шутки про самолюбие');
+    message('aryadovoy', '+ @Happycatfish Великодушный!');
+    message('aryadovoy', '@Happycatfish','@Happycatfish можно доверять\n@Happycatfish <= Вы\nВеликодушный!');
+    console.log("tests end");
     user.clear();
 }
