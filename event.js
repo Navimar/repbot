@@ -14,6 +14,7 @@ module.exports = {
 
     },
     relation: (obj, subj, comment, relation) => {
+        // console.log(obj, subj, comment, relation);
         exe.relation(obj, subj, comment, relation);
         saveEvent({
             event: 'relation',

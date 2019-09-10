@@ -5,7 +5,6 @@ const find = require('./find');
 module.exports = {
     text: (ctx, txt) => {
         txt = txt.trim();
-        // console.log(txt);
         // console.log('txt0 '+txt[0]);
         if (['0', '+', '-'].includes(txt[0])) {
             txt = txt[0] + ' ' + txt.substr(1);
@@ -22,7 +21,7 @@ module.exports = {
         }
         switch (relation) {
             case '/start':
-                event.start(ctx.from.username);
+                event.start(ctx.from.username.toLowerCase());
                 send(ctx, 'Здравствуйте, Сеть Доверия позволяет проверить пользователя телеграм и определить его репутацию среди тех, кому вы доверяете. Чтобы получить инфомрацию об аккаунтах сначала добавьте всех, кому вы доверяете, для этого используйте команду\n+ @username комментарий в свободной форме о причинах доверия и степени доверия\nесли вы хотите предупредить о том что пользователю доверять нельзя используйте команду\n- @username комментарий в свободной форме о причинах и степени недоверия\nУчтите, что при проверке репутации учитывается мнение только тех людей кому Вы доверяете и тех кому доверяют они, по цепочке. Такая система полностью исключает возможность накрутки как с нашей стороны, так и со стороны третьих лиц, ботоводов и накрутчиков. Поэтому Сеть Доверия позволяет получить максимально точную информацию. Для полного Списка команд и более подброного описания используйте команду /help. Задать вопросы и обсудить работу бота можно в группе https://t.me/joinchat/AdNTOUd4Nhi1i8kpSJUiog.');
                 break;
             case '/help':
@@ -30,11 +29,11 @@ module.exports = {
                 break;
             case '+':
                 if (username) {
-                    if (ctx.from.username == username.slice(1)) {
+                    if (ctx.from.username.toLowerCase() == username.slice(1).toLowerCase()) {
                         send(ctx, "Место для смешной шутки про самолюбие");
                     } else {
                         if (username[0] == '@' && username.length > 5) {
-                            event.relation(ctx.from.username, username.slice(1), comment, '+')
+                            event.relation(ctx.from.username.toLowerCase(), username.slice(1).toLowerCase(), comment, '+')
                             send(ctx, 'Теперь Вы доверяете ' + username + ' с комментарием "' + comment + '"');
                         } else {
                             send(ctx, "Некорректный юзернейм");
@@ -46,11 +45,11 @@ module.exports = {
                 break;
             case '-':
                 if (username) {
-                    if (ctx.from.username == username.slice(1)) {
+                    if (ctx.from.username.toLowerCase() == username.slice(1).toLowerCase()) {
                         send(ctx, "Не будьте так самокритичны, мы уверены, все будет хорошо");
                     } else {
                         if (username[0] == '@' && username.length > 5) {
-                            event.relation(ctx.from.username, username.slice(1), comment, '-')
+                            event.relation(ctx.from.username.toLowerCase(), username.slice(1).toLowerCase(), comment, '-')
                             send(ctx, "Теперь Вы НЕ доверяете " + username + ' с комментарием "' + comment + '"');
                         } else {
                             send(ctx, "Некорректный юзернейм");
@@ -63,7 +62,7 @@ module.exports = {
             case '0':
                 if (username) {
                     if (username[0] == '@' && username.length > 5) {
-                        event.relation(ctx.from.username, username.slice(1), false, '0')
+                        event.relation(ctx.from.username.toLowerCase(), username.slice(1).toLowerCase(), false, '0')
                         send(ctx, "Теперь Вы нейтрально относитесь к " + username);
                     } else {
                         send(ctx, "некорректный юзернейм");
@@ -74,10 +73,11 @@ module.exports = {
                 break;
             default:
                 if (relation[0] == '@' && relation.length > 5) {
-                    let answer = find.findPath(ctx.from.username, relation.slice(1));
+                    let answer = find.findPath(ctx.from.username.toLowerCase(), relation.slice(1).toLowerCase());
                     // let answer = find.f(ctx.from.username, relation.slice(1));
+                    
                     if (answer == 'self') {
-                        send(ctx, '@' + ctx.from.username + ' можно доверять как себе');
+                        send(ctx, '@' + ctx.from.username.toLowerCase() + ' можно доверять как себе');
                     } else if (answer) {
                         let text = '';
                         text += '@' + answer[0].username;

@@ -10,6 +10,7 @@ module.exports = {
         }
     },
     relation: (objname, subjname, comment, relation) => {
+        // console.log(objname, subjname, comment, relation)
         let obj = user.byUsername(objname);
         let flag = true
         for (let r in obj.relations) {
