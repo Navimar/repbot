@@ -47,10 +47,10 @@ module.exports = {
             case '-':
                 if (username) {
                     if (msg.from.username.toLowerCase() == username.slice(1).toLowerCase()) {
-                        send(ctx, "Не будьте так самокритичны, мы уверены, все будет хорошо");
+                        send(msg, "Не будьте так самокритичны, мы уверены, все будет хорошо");
                     } else {
                         if (username[0] == '@' && username.length > 5) {
-                            event.relation(ctx.from.username.toLowerCase(), username.slice(1).toLowerCase(), comment, '-')
+                            event.relation(msg.from.username.toLowerCase(), username.slice(1).toLowerCase(), comment, '-')
                             send(msg.from.id, "Теперь Вы НЕ доверяете " + username + ' с комментарием "' + comment + '"');
                         } else {
                             send(msg.from.id, "Некорректный юзернейм");
