@@ -1,8 +1,8 @@
-const input = require('./input.js')
-const user = require('./user.js')
-const test = require('./tests.js')
-const load = require('./load.js')
-const config = require('./config');
+const input = require('./server/input.js')
+const user = require('./server/user.js')
+const test = require('./server/tests.js')
+const load = require('./server/load.js')
+const config = require('./server/config');
 
 
 // Array Remove - By John Resig (MIT Licensed)
@@ -13,11 +13,11 @@ const config = require('./config');
 // };
 
 if (config.runtests) {
-    load('testdata.txt');
+    load('data/testdata.txt');
     test();
     user.clear();
 }
 
-load('data.txt');
+load('data/data.txt');
 
-input.init();
+input.bot();
