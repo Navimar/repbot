@@ -50,7 +50,7 @@ function saveEvent(val) {
         date: Date.now()
     };
     // console.log(data);
-    fs.appendFile('./data.txt', JSON.stringify(data) + "\n", function (err) {
+    fs.appendFile('.data/data.txt', JSON.stringify(data) + "\n", function (err) {
         if (err !== null) {
             console.log(err);
             throw 'log writing error';
