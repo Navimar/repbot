@@ -17,7 +17,6 @@ if (config.runtests) {
     test();
     user.clear();
 }
-
 load('data/data.txt');
 
 input.bot();

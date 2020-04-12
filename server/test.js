@@ -1,3 +1,4 @@
+const event = require('./event');
 const handle = require('./handle');
 let n = 0;
 let m = 1;
@@ -6,30 +7,30 @@ let lastauthor = 'Happycatfish';
 let lasttext = '/start';
 // module.exports = {
 // start: () => {
-let Reply = function (author) {
-  this.sendtext = (text) => {
-    // console.log(">", text)
-    results[n] = text;
-    n++;
-  }
-}
+
 let message = (author, text, answer) => {
   let c = n;
-  handle.text({ from: { username: author }, reply: new Reply(author).sendtext, }, text);
+  let results = handle.text({ from: { username: author }, text });
+
+  results.event.forEach(e => {
+    event[e.name].apply(this, e.arg)
+  }
+  );
 
   if (answer) {
     if (!Array.isArray(answer)) {
       answer = [answer];
     }
     answer.forEach(e => {
-      if (e != results[c]) {
+      // console.log('hi',  results.send[c].text);
+      if (e != results.send[c].text) {
         if (author !== lastauthor || text !== lasttext) {
           console.log(author + ":", text)
           lastauthor = author;
           lasttext = text;
         }
         // console.log( author, text, results[c], '!=', e)
-        console.log(c + '\n' + results[c] + '\n!=\n' + e)
+        console.log(c + '\n' + results.send[c].text + '\n!=\n' + e)
       }
       c++
     });
