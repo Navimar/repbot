@@ -2,7 +2,7 @@ let users = new Map;
 
 let user =
 {
-    add: (username,id) => {
+    add: (username, id) => {
         let obj = {
             username,
             relations: [],
