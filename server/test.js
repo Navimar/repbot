@@ -5,8 +5,6 @@ let m = 1;
 let results = [];
 let lastauthor = 'Happycatfish';
 let lasttext = '/start';
-// module.exports = {
-// start: () => {
 
 let message = (author, text, answer) => {
   let c = n;

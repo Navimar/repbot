@@ -1,4 +1,3 @@
-const fs = require('fs');
 const exe = require('./exe');
 
 module.exports = {
@@ -7,7 +6,7 @@ module.exports = {
     },
     start: (user) => {
         exe.start(user);
-        saveEvent({
+        return ({
             event: 'start',
             user,
         });
@@ -15,22 +14,9 @@ module.exports = {
     },
     relation: (obj, subj, comment, relation) => {
         exe.relation(obj, subj, comment, relation);
-        saveEvent({
+        return ({
             event: 'relation',
             obj, subj, comment, relation
         });
     },
-}
-
-function saveEvent(val) {
-    const data = {
-        val,
-        date: Date.now()
-    };
-    fs.appendFile('data/data.txt', JSON.stringify(data) + "\n", function (err) {
-        if (err !== null) {
-            console.log(err);
-            throw 'log writing error';
-        }
-    });
 }
