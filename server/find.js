@@ -22,8 +22,7 @@ module.exports = {
     //   [{ username: 'another', comment: 'gjh' }],
     //   [{ username: to, comment: 'a good person' }, { username: 'krokodil', comment: 'best friend' }, { username: 'popoev', comment: 'very very nice' }],
     // ]
-    let br = true
-    while (que.length > 0 && que[0].length < 6 && que[0][0].username !== to && br) {
+    while (que.length > 0 && que[0].length < 6 && que[0][0].username !== to) {
       // console.log('zzz', que)
       let firstpath = que.shift();
       if (firstpath[0].relation == '+') {

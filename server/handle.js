@@ -16,7 +16,6 @@ module.exports = {
     }
     let words = txt.split(' ');
     words = words.filter(Boolean);
-    // console.log(words)
     let relation = words[0];
     let username = words[1];
     words.splice(0, 2);
@@ -133,31 +132,6 @@ module.exports = {
             send.push({
               id: msg.from.id, text
             });
-            // send(ctx, answer);
-            // let text = '@';
-            // text += answer.path[answer.path.length - 1].obj;
-            // if(answer.path[answer.path.length - 1].relation=='+'){
-            //     text += " можно доверять"
-            // }else{
-            //     text += " НЕЛЬЗЯ доверять!"
-            // }
-            // send(ctx, text);
-
-            // // console.log(answer.path.reverse());
-            // for (let a in answer.path.reverse()) {
-            //     a = parseInt(a);
-            //     let from;
-            //     if (a == answer.path.length - 1) {
-            //         from = " <= Вы"
-            //     } else {
-            //         from = " <= @" + answer.path[a + 1].obj;
-            //     }
-            //     text = '@'
-            //     text += answer.path[a].obj
-            //     text += from;
-            //     send(ctx, text);
-            //     text = answer.path[a].comment;
-            //     send(ctx, text);
           } else {
             send.push({
               id: msg.from.id, text: "Для построения цепочки доверия необходимо добавить больше пользователей, которым вы доверяете.\nЧтобы реже видеть эту ошибку, обозначьте свое доверие ко всем, кому вы доверяете командой\n+ @username\nи попросите их указать, кому доверяют они."
