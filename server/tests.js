@@ -8,6 +8,7 @@ module.exports = () => {
     message('Happycatfish', '@test983475', '@test983475 можно доверять\n@test983475 <= Вы\nчестный человек, мой бро');
     //теперь начинаем с чистого листа
     user.clear();
+    message('', '0 @nocomment', 'Установите username, чтобы пользоваться ботом');
     message('Happycatfish', '0 @nocomment', 'Теперь Вы нейтрально относитесь к @nocomment');
     message('Happycatfish', '0 @nocomment', 'Теперь Вы нейтрально относитесь к @nocomment');
     message('Happycatfish', '0 @nocomment', 'Теперь Вы нейтрально относитесь к @nocomment');
