@@ -113,7 +113,7 @@ module.exports = {
 
             if (answer == 'self') {
               send.push({ id: msg.from.id, text: '@' + msg.from.username.toLowerCase() + ' можно доверять как себе' });
-            } else if (answer) {
+            } else if (answer && answer.length > 0) {
               let text = '';
               text += '@' + answer[0].username;
               // console.log(answer[0])
