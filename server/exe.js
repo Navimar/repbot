@@ -4,13 +4,13 @@ module.exports = {
     lunch: () => {
 
     },
-    start: (username) => {
-        if (!user.byUsername(username)) {
-            return user.add(username);
+    start: (username, id) => {
+        let u = user.byUsername(username);
+        if (!u || u.id != id) {
+            return user.add(username, id);
         }
     },
     relation: (objname, subjname, comment, relation) => {
-        // console.log(objname, subjname, comment, relation)
         let obj = user.byUsername(objname);
         let flag = true
         for (let r in obj.relations) {
@@ -36,12 +36,4 @@ module.exports = {
             }
         }
     },
-    // clearrealtion: (objname, subjname) => {
-    //     let obj = user.byUsername(objname);
-    //     for (let r in obj.relations) {
-    //         if (obj.relations[r].username == subjname) {
-    //             obj.relations.splice(r, 1);
-    //         }
-    //     }
-    // },
 }

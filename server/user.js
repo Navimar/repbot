@@ -3,6 +3,8 @@ let users = new Map;
 let user =
 {
     add: (username, id) => {
+        if (!id)
+            id = 0;
         let obj = {
             username,
             relations: [],

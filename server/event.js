@@ -4,11 +4,11 @@ module.exports = {
     lunch: () => {
         exe.lunch();
     },
-    start: (user) => {
-        exe.start(user);
+    start: (user, id) => {
+        exe.start(user, id);
         return ({
             event: 'start',
-            user,
+            user, id
         });
 
     },
