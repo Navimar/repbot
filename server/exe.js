@@ -6,12 +6,16 @@ module.exports = {
     },
     start: (username, id) => {
         let u = user.byUsername(username);
-        if (!u || u.id != id) {
+        if (!u) {
             return user.add(username, id);
         }
+        else if (u.id != id)
+            u.id = id;
+        return false;
     },
     relation: (objname, subjname, comment, relation) => {
         let obj = user.byUsername(objname);
+        console.log(obj);
         let flag = true
         for (let r in obj.relations) {
             if (obj.relations[r].username == subjname) {
