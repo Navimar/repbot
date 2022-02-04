@@ -15,7 +15,6 @@ module.exports = {
     },
     relation: (objname, subjname, comment, relation) => {
         let obj = user.byUsername(objname);
-        console.log(obj);
         let flag = true
         for (let r in obj.relations) {
             if (obj.relations[r].username == subjname) {
