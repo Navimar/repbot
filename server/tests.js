@@ -57,7 +57,7 @@ module.exports = () => {
     message('aaaaa', '+ @ddddd',)
     message('aaaaa', ' @ddddd', '@ddddd можно доверять\n@ddddd <= Вы\nбез комментариев');
     user.clear();
-    message('testtest', "+@aaaaa комментарий для aaaaa\n+@bbbbb комментарий для bbbbb\n+@ccccc комментарий для ccccc\n+@ddddd комментарий для ddddd\n+@eeeee комментарий для eeeee\n+@fffff комментарий для fffff", "Теперь вы доверяете @aaaaa, @bbbbb, @ccccc, @ddddd, @eeeee, @fffff");
+    message('testtest', "+@aaaaa комментарий для aaaaa\n+@bbbbb комментарий для bbbbb\n+@ccccc комментарий для ccccc\n+@ddddd комментарий для ddddd\n+@eeeee комментарий для eeeee\n+@fffff комментарий для fffff", "Теперь Вы доверяете @aaaaa, @bbbbb, @ccccc, @ddddd, @eeeee, @fffff");
     user.clear();
 
 }

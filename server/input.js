@@ -7,13 +7,11 @@ const save = require('./save');
 let input = {};
 
 input.bot = () => {
-  bot.on('text', msg => {
+  bot.on('text', async (ctx) => {
+    const msg = ctx.message;
     let res = handle.text(msg);
-    res.send.forEach(e =>
-      send(e.id, e.text));
-    res.event.forEach(e =>
-      save(event[e.name].apply(this, e.arg))
-    );
+    await Promise.all(res.send.map(e => send(e.id, e.text)));
+    await Promise.all(res.event.map(e => save(event[e.name].apply(this, e.arg))));
   });
 };
 
